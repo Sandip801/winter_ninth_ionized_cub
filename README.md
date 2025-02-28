@@ -1,37 +1,12 @@
-<!-- # 🏛️ Blind Auction -->
+<!-- # 🏛️ Private GO FUND ME -->
 
-[//]: # (<img alt="workshop/auction" width="1412" src="../.resources/auction.png">)
-
-A first-price sealed-bid auction in Leo.
 
 ## Summary
 
-A first-price sealed-bid auction (or blind auction) is a type of auction in which each participant submits a bid without knowing the bids of the other participants. 
-The bidder with the highest bid wins the auction.
-
-In this model, there are two parties: the auctioneer and the bidders.
-- **Bidder**: A participant in the auction.
-- **Auctioneer**: The party responsible for conducting the auction.
-
-We make the following assumptions about the auction:
-- The auctioneer is honest. That is, the auctioneer will resolve **all** bids in the order they are received. The auctioneer will not tamper with the bids.
-- There is no limit to the number of bids.
-- The auctioneer knows the identity of all bidders, but bidders do not necessarily know the identity of other bidders.
-
-Under this model, we require that:
-- Bidders do not learn any information about the value of other bids.
-
-### Auction Flow
-The auction is conducted in a series of stages.
-- **Bidding**: In the bidding stage, bidders submit bids to the auctioneer. They do so by invoking the `place_bid` function.
-- **Resolution**:  In the resolution stage, the auctioneer resolves the bids in the order they were received. The auctioneer does so by invoking the `resolve` function. The resolution process produces a single winning bid.
-- **Finishing**: In this stage, the auctioneer finishes the auction by invoking the `finish` function. This function returns the winning bid to the bidder, which the bidder can then use to claim the item.
+This a smart contract for the private go fund me, where user can registered their project and other user can fund it privately
+User can claim their funds publicly after their time reaches
 
 
-## Language Features and Concepts
-- `record` declarations
-- `assert_eq`
-- record ownership
 
 ## Running the Program
 
