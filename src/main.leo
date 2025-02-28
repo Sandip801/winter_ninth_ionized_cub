@@ -4,14 +4,7 @@ import token_registry.aleo;
 program compliant_token_sandip.aleo {
 
 
-// The 'compliant_token' program.
-  // Constants defining the token parameters.
   const COMPLAINT_TOKEN_ID: field = 71619063553950105623552field; // Unique token identifier
-  const ADMIN_ADDRESS: address = aleo10047h9c9efxz3d0u69xn7alclvsvt96ysuhts80p7h2eh57kh5zsjwsp8f; // Admin address with minting and issuing privileges
-  const MAX_SUPPLY: u128 = 1_000_000_000_000_000u128; // Maximum supply of the token
-  const BLOCKS_IN_A_DAY: u32 = 28_800u32; // Number of blocks per day for epoch-based calculations
-  const MAX_SPEND_PER_DAY: u128 = 10_000_000_000u128; // Daily spending limit per user
-  const MAX_U32: u32 = 4294967295u32; // Maximum value of a u32, used for transaction expiration
 
   // registered projectS are stored in a mapping with the project ID as the key
   mapping registered_project: field => address;
@@ -31,8 +24,7 @@ program compliant_token_sandip.aleo {
   }
 
   /**
-   * Transfers tokens privately while enforcing the user's spend limit.
-   * Ensures that the user cannot exceed the daily spend limit.
+   * Transfers tokens privately 
    */
   async transition fund_private(
     input_token: token_registry.aleo/Token, // The input token record to be spent
@@ -40,11 +32,6 @@ program compliant_token_sandip.aleo {
     project_id: field, // Recipient project ID
   ) -> (token_registry.aleo/Token, Future) {
     
-    // **Transfer the authorized token** to the recipient.
-    // This produces 3 outputs:
-    // - A token record with the remaining balance (always 0)
-    // - An unauthorized token with the transferred amount
-    // - A future that must be awaited
     let transfer_output: (token_registry.aleo/Token, Future) = token_registry.aleo/transfer_private_to_public(
       compliant_token_sandip.aleo,
       amount,
@@ -58,7 +45,7 @@ program compliant_token_sandip.aleo {
   }
 
   /**
-   * Finalizes the transfer by awaiting the completion of both authorization and transfer transactions.
+   * Finalizes the transfer
    */
   async function finalize_fund_private(
     f0: Future, // Future from transfer_private
